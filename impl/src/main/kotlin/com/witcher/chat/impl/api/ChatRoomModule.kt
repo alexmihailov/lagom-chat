@@ -1,4 +1,4 @@
-package com.witcher.chat.impl
+package com.witcher.chat.impl.api
 
 import com.google.inject.AbstractModule
 import com.lightbend.lagom.javadsl.server.ServiceGuiceSupport

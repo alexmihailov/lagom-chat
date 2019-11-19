@@ -1,4 +1,4 @@
-package com.witcher.chat.impl
+package com.witcher.chat.impl.api
 
 import com.lightbend.lagom.javadsl.api.ServiceCall
 import com.lightbend.lagom.javadsl.api.transport.RequestHeader

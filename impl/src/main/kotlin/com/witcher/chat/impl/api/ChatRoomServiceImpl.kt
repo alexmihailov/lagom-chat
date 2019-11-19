@@ -1,4 +1,4 @@
-package com.witcher.chat.impl
+package com.witcher.chat.impl.api
 
 import akka.NotUsed
 import akka.stream.javadsl.Source
