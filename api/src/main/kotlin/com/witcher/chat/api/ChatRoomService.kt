@@ -6,7 +6,9 @@ import com.lightbend.lagom.javadsl.api.Descriptor
 import com.lightbend.lagom.javadsl.api.Service
 import com.lightbend.lagom.javadsl.api.Service.named
 import com.lightbend.lagom.javadsl.api.Service.namedCall
+import com.lightbend.lagom.javadsl.api.Service.restCall
 import com.lightbend.lagom.javadsl.api.ServiceCall
+import com.lightbend.lagom.javadsl.api.transport.Method
 import kotlin.reflect.jvm.javaMethod
 
 /**
@@ -14,13 +16,15 @@ import kotlin.reflect.jvm.javaMethod
  */
 interface ChatRoomService : Service {
 
-    fun helloWorld(): ServiceCall<Source<String, NotUsed>, Source<String, NotUsed>>
+    fun getHomePage(): ServiceCall<NotUsed, String>
+    fun socket(): ServiceCall<Source<InputMessageData, NotUsed>, Source<OutputMessageData, NotUsed>>
 
     @JvmDefault
     override fun descriptor(): Descriptor {
         return named("chat-room")
                 .withCalls(
-                        namedCall<Source<String, NotUsed>, Source<String, NotUsed>>("hello-world", ChatRoomService::helloWorld.javaMethod)
+                        restCall<NotUsed, String>(Method.GET, "/home", ChatRoomService::getHomePage.javaMethod),
+                        namedCall<Source<String, NotUsed>, Source<String, NotUsed>>("socket", ChatRoomService::socket.javaMethod)
                 ).withAutoAcl(true)
     }
 }
